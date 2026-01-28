@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elizabeth G. Postema</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #F9F7F4;
+            --sage: #8B9B7E;
+            --moss: #5F7355;
+            --earth: #7D6B5C;
+            --deep-green: #3A4D3A;
+            --warm-white: #FEFDFB;
+            --accent-red: #C84B3C;
+            --accent-orange: #E87D52;
+            --soft-brown: #A38B7B;
+            --shadow: rgba(61, 77, 58, 0.1);
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            background: var(--cream);
+            color: var(--deep-green);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Decorative background elements */
+        .bg-decoration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.03;
+            background-image: 
+                radial-gradient(circle at 20% 30%, var(--sage) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, var(--moss) 0%, transparent 50%);
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(249, 247, 244, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid rgba(139, 155, 126, 0.2);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--moss);
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--earth);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-red);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--moss);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Main content container */
+        main {
+            position: relative;
+            z-index: 1;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 5rem 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        #about {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 6rem;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: var(--moss);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.3rem;
+            color: var(--earth);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--earth);
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+        }
+
+        .hero-image {
+            position: relative;
+            padding: 2rem;
+        }
+
+        .image-frame {
+            position: relative;
+            border: 3px solid var(--sage);
+            padding: 1rem;
+            background: var(--warm-white);
+            box-shadow: 0 10px 40px var(--shadow);
+            transform: rotate(2deg);
+            transition: transform 0.3s ease;
+        }
+
+        .image-frame:hover {
+            transform: rotate(0deg);
+        }
+
+        .image-frame img {
+            width: 100%;
+            display: block;
+        }
+
+        /* Section header styles */
+
+        /* Contact buttons */
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border: 2px solid var(--moss);
+            background: transparent;
+            color: var(--moss);
+            font-family: 'Lora', serif;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: var(--moss);
+            color: var(--warm-white);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(95, 115, 85, 0.3);
+        }
+
+        .btn.primary {
+            background: var(--accent-red);
+            border-color: var(--accent-red);
+            color: var(--warm-white);
+        }
+
+        .btn.primary:hover {
+            background: var(--accent-orange);
+            border-color: var(--accent-orange);
+        }
+
+        /* Section Headers */
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: var(--moss);
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-red);
+        }
+
+        /* Research Section */
+        #research {
+            background: var(--warm-white);
+        }
+
+        .research-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .research-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: center;
+            background: var(--cream);
+            border: 2px solid var(--sage);
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-card:nth-child(even) {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .research-card:nth-child(even) .research-image {
+            order: 2;
+        }
+
+        .research-card:nth-child(even) .research-content {
+            order: 1;
+        }
+
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 155, 126, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .research-card:hover::before {
+            left: 100%;
+        }
+
+        .research-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px var(--shadow);
+            border-color: var(--moss);
+        }
+
+        .research-image {
+            position: relative;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            border: 3px solid var(--sage);
+            background: var(--warm-white);
+            transition: border-color 0.3s ease;
+        }
+
+        .research-card:hover .research-image {
+            border-color: var(--accent-red);
+        }
+
+        .research-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .research-card:hover .research-image img {
+            transform: scale(1.05);
+        }
+
+        .research-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--moss);
+            margin-bottom: 1rem;
+        }
+
+        .research-content p {
+            color: var(--earth);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .research-tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: var(--sage);
+            color: var(--warm-white);
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Art & Outreach Section */
+        #art {
+            background: var(--cream);
+        }
+
+        .gallery-section {
+            margin-bottom: 4rem;
+        }
+
+        .gallery-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .gallery-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--moss);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .carousel-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .carousel-wrapper {
+            overflow: hidden;
+            border: 3px solid var(--sage);
+            background: var(--warm-white);
+            box-shadow: 0 8px 30px var(--shadow);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            aspect-ratio: 4/3;
+            position: relative;
+        }
+
+        .carousel-item img,
+        .carousel-item svg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(58, 77, 58, 0.95), rgba(58, 77, 58, 0.85));
+            color: var(--warm-white);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .carousel-caption h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(249, 247, 244, 0.95);
+            border: 2px solid var(--sage);
+            color: var(--moss);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            z-index: 10;
+            user-select: none;
+        }
+
+        .carousel-nav:hover {
+            background: var(--moss);
+            color: var(--warm-white);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .carousel-nav.prev {
+            left: -25px;
+        }
+
+        .carousel-nav.next {
+            right: -25px;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--sage);
+            opacity: 0.4;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            opacity: 1;
+            background: var(--accent-red);
+            transform: scale(1.2);
+        }
+
+        .carousel-dot:hover {
+            opacity: 0.8;
+        }
+
+        /* Publications Section */
+        #publications {
+            background: var(--warm-white);
+        }
+
+        .publications-list {
+            max-width: 900px;
+        }
+
+        .pub-category {
+            margin-bottom: 3rem;
+        }
+
+        .pub-category h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--moss);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--sage);
+        }
+
+        .pub-item {
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            background: var(--cream);
+            border-left: 4px solid var(--sage);
+            transition: all 0.3s ease;
+        }
+
+        .pub-item:hover {
+            border-left-color: var(--accent-red);
+            background: var(--warm-white);
+            transform: translateX(8px);
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .pub-item p {
+            color: var(--earth);
+            margin-bottom: 0.5rem;
+        }
+
+        .pub-link {
+            color: var(--accent-red);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .pub-link:hover {
+            color: var(--accent-orange);
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--cream);
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--warm-white);
+            border: 2px solid var(--sage);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            border-color: var(--moss);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--accent-red);
+        }
+
+        .contact-item a {
+            color: var(--earth);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item:hover a {
+            color: var(--moss);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--deep-green);
+            color: var(--cream);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        footer a:hover {
+            color: var(--accent-orange) !important;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            .research-card {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .research-card:nth-child(even) .research-image,
+            .research-card:nth-child(even) .research-content {
+                order: initial;
+            }
+
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .carousel-nav.prev {
+                left: -20px;
+            }
+
+            .carousel-nav.next {
+                right: -20px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .hero-text .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+            }
+
+            .gallery-title {
+                font-size: 1.5rem;
+            }
+
+            .carousel-nav {
+                width: 35px;
+                height: 35px;
+            }
+
+            .carousel-nav.prev {
+                left: 5px;
+            }
+
+            .carousel-nav.next {
+                right: 5px;
+            }
+        }
+
+        /* Scroll reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading animation for images */
+        img {
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+            animation-delay: 0.3s;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--cream);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--sage);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--moss);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-decoration"></div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">Elizabeth G. Postema</div>
+            <ul class="nav-links">
+                <li><a href="#about" class="active">About</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#art">Art & Outreach</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- About Section -->
+        <section id="about">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>Elizabeth G. Postema</h1>
+                        <p class="subtitle">Postdoctoral Research Scientist</p>
+                        <p>Insects are among the most diverse organisms on earth. As a researcher, I study the conflicting pressures that produce and maintain diversity in insect coloration and behavior.</p> 
+			<p>I create AI tools to extract traits from thousands of images of specimens, and use these data for large phylogenetic comparative analyses. I also conduct experiments in the field (using both live and artificial insects) to test hypotheses about the ecology and evolution of defensive adaptations.</p>
+                        <div class="contact-buttons">
+                            <a href="#contact" class="btn primary">Get in Touch</a>
+                            <a href="#publications" class="btn">View Publications</a>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <div class="image-frame">
+                            <!-- Placeholder for professional photo -->
+                            <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="400" height="500" fill="#8B9B7E" opacity="0.2"/>
+                                <text x="200" y="250" text-anchor="middle" font-family="Lora, serif" font-size="18" fill="#5F7355" opacity="0.6">Professional Photo</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Section -->
+        <section id="research" class="reveal">
+            <div class="container">
+                <h2>Research</h2>
+                <div class="research-grid">
+                    <!-- 1. Insect Antipredator Strategies (first) -->
+                    <div class="research-card">
+                        <div class="research-image">
+                            <!-- Placeholder for caterpillar/eyespot image -->
+                            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="400" height="300" fill="#F9F7F4"/>
+                                <ellipse cx="200" cy="150" rx="140" ry="40" fill="#8B9B7E"/>
+                                <circle cx="160" cy="135" r="25" fill="#3A4D3A"/>
+                                <circle cx="240" cy="135" r="25" fill="#3A4D3A"/>
+                                <circle cx="160" cy="135" r="15" fill="#FEFDFB"/>
+                                <circle cx="240" cy="135" r="15" fill="#FEFDFB"/>
+                                <circle cx="160" cy="135" r="8" fill="#3A4D3A"/>
+                                <circle cx="240" cy="135" r="8" fill="#3A4D3A"/>
+                                <path d="M100,150 Q80,120 70,145" stroke="#5F7355" stroke-width="4" fill="none"/>
+                                <path d="M300,150 Q320,120 330,145" stroke="#5F7355" stroke-width="4" fill="none"/>
+                                <ellipse cx="200" cy="165" rx="120" ry="25" fill="#7D6B5C" opacity="0.5"/>
+                            </svg>
+                        </div>
+                        <div class="research-content">
+                            <h3>Insect Antipredator Strategies</h3>
+                            <p>I am fascinated by the many strategies insects use to avoid predation, particularly from camouflage to shelter-building. These strategies are shaped by many, often conflicting, selection pressures. I want to understand when, why, and to what degree these pressures influence insect phenotypic diversity. I am also interested in the ways that insects can resolve tradeoffs between selection pressures through adaptive behaviors, such as environmental modification. </p>
+                            <div>
+                                <span class="research-tag">Behavioral Ecology</span>
+				<span class="research-tag">Visual Signaling</span>
+                                <span class="research-tag">Plant-Insect Interactions</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. AI-Powered Specimen Digitization (second) -->
+                    <div class="research-card">
+                        <div class="research-image">
+                            <!-- Placeholder for AI/digitization image -->
+                            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="400" height="300" fill="#F9F7F4"/>
+                                <rect x="50" y="50" width="300" height="200" fill="none" stroke="#5F7355" stroke-width="3"/>
+                                <circle cx="100" cy="100" r="15" fill="#8B9B7E"/>
+                                <circle cx="150" cy="100" r="15" fill="#8B9B7E"/>
+                                <circle cx="200" cy="100" r="15" fill="#8B9B7E"/>
+                                <circle cx="250" cy="100" r="15" fill="#8B9B7E"/>
+                                <circle cx="300" cy="100" r="15" fill="#8B9B7E"/>
+                                <circle cx="100" cy="150" r="15" fill="#E87D52"/>
+                                <circle cx="150" cy="150" r="15" fill="#8B9B7E"/>
+                                <circle cx="200" cy="150" r="15" fill="#8B9B7E"/>
+                                <circle cx="250" cy="150" r="15" fill="#8B9B7E"/>
+                                <circle cx="300" cy="150" r="15" fill="#8B9B7E"/>
+                                <circle cx="100" cy="200" r="15" fill="#8B9B7E"/>
+                                <circle cx="150" cy="200" r="15" fill="#8B9B7E"/>
+                                <circle cx="200" cy="200" r="15" fill="#C84B3C"/>
+                                <circle cx="250" cy="200" r="15" fill="#8B9B7E"/>
+                                <circle cx="300" cy="200" r="15" fill="#8B9B7E"/>
+                            </svg>
+                        </div>
+                        <div class="research-content">
+                            <h3>AI-Powered Specimen Digitization</h3>
+                            <p>Insect collections are a treasure trove of biological data. The scale of these collections, however, is as much an opportunity as it is a challenge; digitizing insects is an infamously laborious, time-consuming process. At the Field Museum, I led the development of DrawerDissect: an AI-based workflow to photograph and extract data from thousands of insect specimens at a time. With this and other AI-based pipelines, I investigate the ecology and evolution of insect phenotypic traits.</p>
+                            <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+                                <a href="https://github.com/EGPostema/DrawerDissect" target="_blank" class="btn">View DrawerDissect →</a>
+                                <a href="#" target="_blank" class="btn">Watch Roboflow Webinar →</a>
+                            </div>
+                            <div style="margin-top: 1rem;">
+                                <span class="research-tag">Computer Vision</span>
+                                <span class="research-tag">Natural History Collections</span>
+				<span class="research-tag">Evolution</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Effects of Climate Change on Insects -->
+                    <div class="research-card">
+                        <div class="research-image">
+                            <!-- Placeholder for climate/field study image -->
+                            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="400" height="300" fill="#F9F7F4"/>
+                                <circle cx="80" cy="60" r="30" fill="#E87D52" opacity="0.7"/>
+                                <path d="M50,200 Q100,180 150,200 Q200,220 250,200 Q300,180 350,200" stroke="#8B9B7E" stroke-width="3" fill="none"/>
+                                <path d="M50,210 Q100,190 150,210 Q200,230 250,210 Q300,190 350,210" stroke="#8B9B7E" stroke-width="3" fill="none"/>
+                                <ellipse cx="120" cy="160" rx="20" ry="10" fill="#5F7355"/>
+                                <ellipse cx="200" cy="170" rx="20" ry="10" fill="#5F7355"/>
+                                <ellipse cx="280" cy="155" rx="20" ry="10" fill="#5F7355"/>
+                                <line x1="200" y1="60" x2="200" y2="140" stroke="#C84B3C" stroke-width="2"/>
+                                <line x1="195" y1="70" x2="200" y2="60" stroke="#C84B3C" stroke-width="2"/>
+                                <line x1="205" y1="70" x2="200" y2="60" stroke="#C84B3C" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="research-content">
+                            <h3>Climate Change and Insects</h3>
+                            <p>For ectotherms like insects, temperature plays an important role in development, survival, and fitness. I am interested in how phenotypic diversity may be constrained by temperature and other abiotic pressures, such as moisture level - and how these dynamics may shift under new climate regimes. </p>
+                            <div>
+                                <span class="research-tag">Climate Change</span>
+                                <span class="research-tag">Thermoregulation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Showcase Section -->
+                <div style="margin-top: 5rem; padding-top: 4rem; border-top: 2px solid rgba(139, 155, 126, 0.3);">
+                    <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--moss); margin-bottom: 2rem; text-align: center;">Featured Research Video</h3>
+                    <div style="max-width: 900px; margin: 0 auto;">
+                        <div style="border: 3px solid var(--sage); background: var(--warm-white); padding: 1.5rem; box-shadow: 0 8px 30px var(--shadow);">
+                            <div style="aspect-ratio: 16/9; background: rgba(139, 155, 126, 0.1); display: flex; align-items: center; justify-content: center; color: var(--earth); border: 2px dashed var(--sage);">
+                                <div style="text-align: center; padding: 2rem;">
+                                    <p style="font-size: 1.2rem; margin-bottom: 0.5rem; font-weight: 500;">Caterpillar Defense Mechanisms</p>
+                                    <p style="font-size: 0.9rem; opacity: 0.7;">Replace this div with your video embed code (YouTube, Vimeo, etc.)</p>
+                                    <p style="font-size: 0.85rem; margin-top: 1rem; opacity: 0.6;">Example: &lt;iframe src="..." width="100%" height="100%" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p style="text-align: center; margin-top: 1.5rem; color: var(--earth); font-style: italic;">
+                            Add your video description or caption here
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Art & Outreach Section -->
+        <section id="art" class="reveal">
+            <div class="container">
+                <h2>Art & Outreach</h2>
+
+                <!-- Art -->
+                <div class="gallery-section">
+                    <div class="carousel-container">
+                        <div class="carousel-wrapper">
+                            <div class="carousel-track" id="artCarousel">
+                                <div class="carousel-item">
+                                    <svg viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="900" height="675" fill="#F9F7F4"/>
+                                        <ellipse cx="450" cy="340" rx="180" ry="50" fill="#8B9B7E"/>
+                                        <circle cx="400" cy="320" r="30" fill="#5F7355"/>
+                                        <circle cx="500" cy="320" r="30" fill="#5F7355"/>
+                                        <circle cx="395" cy="318" r="12" fill="#FEFDFB"/>
+                                        <circle cx="495" cy="318" r="12" fill="#FEFDFB"/>
+                                        <path d="M320,340 Q280,290 250,335" stroke="#5F7355" stroke-width="5" fill="none"/>
+                                        <path d="M580,340 Q620,290 650,335" stroke="#5F7355" stroke-width="5" fill="none"/>
+                                    </svg>
+                                    <div class="carousel-caption">
+                                        <h4>Caterpillar Morphology</h4>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <svg viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="900" height="675" fill="#F9F7F4"/>
+                                        <path d="M200,550 Q300,470 400,510 Q500,550 600,490 L600,590 L200,590 Z" fill="#8B9B7E"/>
+                                        <rect x="300" y="200" width="300" height="240" rx="15" fill="#7D6B5C"/>
+                                        <circle cx="360" cy="280" r="25" fill="#E87D52"/>
+                                        <circle cx="480" cy="280" r="25" fill="#E87D52"/>
+                                        <rect x="400" y="320" width="100" height="60" rx="8" fill="#C84B3C"/>
+                                    </svg>
+                                    <div class="carousel-caption">
+                                        <h4>Field Illustrations</h4>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <svg viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="900" height="675" fill="#F9F7F4"/>
+                                        <ellipse cx="300" cy="240" rx="80" ry="50" fill="#C84B3C"/>
+                                        <ellipse cx="600" cy="360" rx="80" ry="50" fill="#E87D52"/>
+                                        <path d="M200,490 Q300,430 400,470 Q500,510 600,470 Q700,430 800,490" fill="#8B9B7E"/>
+                                        <circle cx="450" cy="550" r="40" fill="#5F7355"/>
+                                    </svg>
+                                    <div class="carousel-caption">
+                                        <h4>Educational Diagrams</h4>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <svg viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="900" height="675" fill="#F9F7F4"/>
+                                        <path d="M300,200 L300,550 M400,200 L400,550 M500,200 L500,550 M600,200 L600,550" stroke="#5F7355" stroke-width="5"/>
+                                        <ellipse cx="450" cy="300" rx="90" ry="40" fill="#8B9B7E"/>
+                                        <ellipse cx="450" cy="400" rx="90" ry="40" fill="#7D6B5C"/>
+                                        <ellipse cx="450" cy="500" rx="90" ry="40" fill="#C84B3C"/>
+                                    </svg>
+                                    <div class="carousel-caption">
+                                        <h4>Life Cycle Studies</h4>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <svg viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="900" height="675" fill="#F9F7F4"/>
+                                        <rect x="160" y="160" width="580" height="380" fill="none" stroke="#5F7355" stroke-width="6"/>
+                                        <circle cx="300" cy="280" r="45" fill="#8B9B7E"/>
+                                        <circle cx="450" cy="280" r="45" fill="#E87D52"/>
+                                        <circle cx="600" cy="280" r="45" fill="#C84B3C"/>
+                                        <rect x="240" y="400" width="420" height="80" fill="#7D6B5C" opacity="0.5"/>
+                                    </svg>
+                                    <div class="carousel-caption">
+                                        <h4>Presentation Graphics</h4>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <svg viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="900" height="675" fill="#F9F7F4"/>
+                                        <circle cx="200" cy="200" r="60" fill="#8B9B7E" opacity="0.6"/>
+                                        <circle cx="450" cy="350" rx="80" ry="80" fill="#E87D52" opacity="0.6"/>
+                                        <circle cx="700" cy="500" r="60" fill="#C84B3C" opacity="0.6"/>
+                                        <path d="M200,500 Q450,400 700,300" stroke="#5F7355" stroke-width="5" fill="none"/>
+                                    </svg>
+                                    <div class="carousel-caption">
+                                        <h4>Scientific Posters</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-nav prev" onclick="moveCarousel('artCarousel', -1)">‹</div>
+                        <div class="carousel-nav next" onclick="moveCarousel('artCarousel', 1)">›</div>
+                        <div class="carousel-dots" id="artDots"></div>
+                    </div>
+                </div>
+
+                <!-- Outreach Gallery -->
+                <div class="gallery-section">
+                    <div class="carousel-container">
+                        <div class="carousel-wrapper">
+                            <div class="carousel-track" id="outreachCarousel">
+                                <div class="carousel-item">
+                                    <svg viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="900" height="675" fill="#F9F7F4"/>
+                                        <rect x="160" y="160" width="580" height="380" fill="#7D6B5C" opacity="0.3"/>
+                                        <circle cx="300" cy="280" r="35" fill="#8B9B7E"/>
+                                        <circle cx="450" cy="280" r="35" fill="#8B9B7E"/>
+                                        <circle cx="600" cy="280" r="35" fill="#8B9B7E"/>
+                                        <rect x="240" y="400" width="420" height="100" fill="#5F7355" opacity="0.4"/>
+                                    </svg>
+                                    <div class="carousel-caption">
+                                        <h4>Museum Tours</h4>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <svg viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="900" height="675" fill="#F9F7F4"/>
+                                        <rect x="200" y="200" width="500" height="280" fill="#8B9B7E" opacity="0.3"/>
+                                        <circle cx="450" cy="340" r="50" fill="#E87D52"/>
+                                        <path d="M300,500 L600,500 M300,500 L300,560 M450,500 L450,560 M600,500 L600,560" stroke="#5F7355" stroke-width="5"/>
+                                    </svg>
+                                    <div class="carousel-caption">
+                                        <h4>Public Talks</h4>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <svg viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="900" height="675" fill="#F9F7F4"/>
+                                        <circle cx="300" cy="300" r="60" fill="#C84B3C" opacity="0.4"/>
+                                        <circle cx="450" cy="300" r="60" fill="#8B9B7E" opacity="0.4"/>
+                                        <circle cx="600" cy="300" r="60" fill="#E87D52" opacity="0.4"/>
+                                        <rect x="240" y="440" width="420" height="120" fill="#7D6B5C" opacity="0.3"/>
+                                    </svg>
+                                    <div class="carousel-caption">
+                                        <h4>Student Workshops</h4>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <svg viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="900" height="675" fill="#F9F7F4"/>
+                                        <path d="M200,490 Q300,430 400,470 Q500,510 600,450 Q700,390 800,430" stroke="#8B9B7E" stroke-width="8" fill="none"/>
+                                        <circle cx="300" cy="360" r="25" fill="#5F7355"/>
+                                        <circle cx="500" cy="400" r="25" fill="#E87D52"/>
+                                        <circle cx="700" cy="340" r="25" fill="#C84B3C"/>
+                                    </svg>
+                                    <div class="carousel-caption">
+                                        <h4>Prairie Restoration</h4>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <svg viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="900" height="675" fill="#F9F7F4"/>
+                                        <rect x="240" y="200" width="420" height="300" fill="#7D6B5C" opacity="0.2"/>
+                                        <circle cx="360" cy="320" r="45" fill="#8B9B7E"/>
+                                        <circle cx="540" cy="320" r="45" fill="#8B9B7E"/>
+                                        <path d="M300,440 Q360,420 450,440 Q540,460 600,440" stroke="#5F7355" stroke-width="6" fill="none"/>
+                                    </svg>
+                                    <div class="carousel-caption">
+                                        <h4>Meet-a-Scientist Events</h4>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <svg viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="900" height="675" fill="#F9F7F4"/>
+                                        <rect x="200" y="160" width="500" height="360" fill="none" stroke="#5F7355" stroke-width="6"/>
+                                        <circle cx="300" cy="280" r="35" fill="#8B9B7E"/>
+                                        <circle cx="450" cy="280" r="35" fill="#E87D52"/>
+                                        <circle cx="600" cy="280" r="35" fill="#C84B3C"/>
+                                        <rect x="260" y="400" width="380" height="60" fill="#7D6B5C" opacity="0.4"/>
+                                    </svg>
+                                    <div class="carousel-caption">
+                                        <h4>School Programs</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-nav prev" onclick="moveCarousel('outreachCarousel', -1)">‹</div>
+                        <div class="carousel-nav next" onclick="moveCarousel('outreachCarousel', 1)">›</div>
+                        <div class="carousel-dots" id="outreachDots"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Publications Section -->
+        <section id="publications" class="reveal">
+            <div class="container">
+                <h2>Publications</h2>
+                <div class="publications-list">
+                    <div class="pub-category">
+                        <h3>In Review</h3>
+                        <div class="pub-item">
+                            <p><strong>Postema, E.G.</strong>, Briscoe, L., Harder, C., Hancock, G.R.A., Guarnieri, L.D., Eisel, T., Welch, K., Fisher, N., Johnson, C., Souza, D., Sepulveda, T., Phillip, D., Baquiran, R., de Medeiros, B.A.S. (2025). DrawerDissect: Whole-drawer insect imaging, segmentation, and trait extraction using AI.</p>
+                            <a href="http://doi.org/10.32942/X2QW84" class="pub-link" target="_blank">View Pre-print →</a>
+                        </div>
+                        <div class="pub-item">
+                            <p>Krell, R., Siebert, M., Bessin, R., Gerken, A., <strong>Postema, E.G.</strong>, Pavlic, T., Riddick, E.W., & Zilnik, G. (2025). Perspectives on the use of Artificial Intelligence (AI) in Entomology.</p>
+                        </div>
+                    </div>
+
+                    <div class="pub-category">
+                        <h3>Peer-Reviewed</h3>
+                        <div class="pub-item">
+                            <p>Yang, L.H., <strong>Postema, E.G.</strong>, Arefaine, H., Cohoon, F.Y., Deen, E.A., Durand, Y.L., Erdosh, G.I., Ma, H., Mausling, C.N., Solis, S., Wilson, M.R. (2025). Live fast, die young? Day- and night-warming affects the growth, survivorship and behavior of caterpillars in the field. <em>Ecology</em>.</p>
+                            <a href="https://doi.org/10.1002/ecy.70150" class="pub-link" target="_blank">Read Article →</a>
+                        </div>
+                        <div class="pub-item">
+                            <p><strong>Postema, E.G.</strong> (2024). Eyespot peek-a-boo: Leaf rolls enhance the antipredator effect of insect eyespots. <em>Journal of Animal Ecology</em>.</p>
+                            <a href="https://doi.org/10.1111/1365-2656.14232" class="pub-link" target="_blank">Read Article →</a>
+                        </div>
+                        <div class="pub-item">
+                            <p><strong>Postema, E.G.</strong>, Lippey, M.K., Armstrong-Ingram, T. (2022). Color under pressure: how multiple factors shape defensive coloration. <em>Behavioral Ecology</em>.</p>
+                            <a href="https://doi.org/10.1093/beheco/arac056" class="pub-link" target="_blank">Read Article →</a>
+                        </div>
+                        <div class="pub-item">
+                            <p><strong>Postema, E.G.</strong> (2021). The effectiveness of eyespots and masquerade in protecting artificial prey across ontogenetic and seasonal shifts. <em>Current Zoology</em>.</p>
+                            <a href="https://doi.org/10.1093/cz/zoab082" class="pub-link" target="_blank">Read Article →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="reveal">
+            <div class="container">
+                <div class="contact-content">
+                    <h2>Get in Touch</h2>
+                    <div class="contact-info">
+                        <a href="mailto:epostema@fieldmuseum.org" class="contact-item" style="text-decoration: none;">
+                            <span class="contact-icon">📧</span>
+                            <span>epostema@fieldmuseum.org</span>
+                        </a>
+                        <a href="https://github.com/EGPostema" target="_blank" class="contact-item" style="text-decoration: none;">
+                            <span class="contact-icon">💻</span>
+                            <span>My GitHub</span>
+                        </a>
+                        <a href="https://nirc.fieldmuseum.org/" target="_blank" class="contact-item" style="text-decoration: none;">
+                            <span class="contact-icon">🏛️</span>
+                            <span>Negaunee Integrative Research Center, Field Museum</span>
+                        </a>
+                        <a href="https://in-flo-lab.group/" target="_blank" class="contact-item" style="text-decoration: none;">
+                            <span class="contact-icon">🔬</span>
+                            <span>de Medeiros Insect Flower Visitors Lab</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Elizabeth G. Postema. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">egpostema@fieldmuseum.org 🐛 </p>
+    </footer>
+
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Active nav link highlighting
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Add shadow to navbar on scroll
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Reveal animations on scroll
+        const reveals = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+
+        // Carousel functionality
+        const carousels = {};
+
+        function initCarousel(id) {
+            const track = document.getElementById(id);
+            const items = track.querySelectorAll('.carousel-item');
+            const dotsContainer = document.getElementById(id.replace('Carousel', 'Dots'));
+            
+            carousels[id] = {
+                track: track,
+                items: items,
+                currentIndex: 0,
+                itemCount: items.length
+            };
+
+            for (let i = 0; i < items.length; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+                dot.onclick = () => goToSlide(id, i);
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function moveCarousel(id, direction) {
+            const carousel = carousels[id];
+            carousel.currentIndex += direction;
+            
+            if (carousel.currentIndex < 0) {
+                carousel.currentIndex = carousel.itemCount - 1;
+            } else if (carousel.currentIndex >= carousel.itemCount) {
+                carousel.currentIndex = 0;
+            }
+            
+            updateCarousel(id);
+        }
+
+        function goToSlide(id, index) {
+            carousels[id].currentIndex = index;
+            updateCarousel(id);
+        }
+
+        function updateCarousel(id) {
+            const carousel = carousels[id];
+            const offset = -carousel.currentIndex * 100;
+            carousel.track.style.transform = `translateX(${offset}%)`;
+            
+            const dotsContainer = document.getElementById(id.replace('Carousel', 'Dots'));
+            const dots = dotsContainer.querySelectorAll('.carousel-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === carousel.currentIndex);
+            });
+        }
+
+        initCarousel('artCarousel');
+        initCarousel('outreachCarousel');
+    </script>
+</body>
+</html>
