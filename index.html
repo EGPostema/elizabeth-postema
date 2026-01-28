@@ -208,13 +208,12 @@
             display: block;
         }
 
-        /* Section header styles */
-
         /* Contact buttons */
         .contact-buttons {
             display: flex;
             gap: 1rem;
             margin-top: 2rem;
+            flex-wrap: wrap;
         }
 
         .btn {
@@ -684,16 +683,58 @@
                 gap: 1rem;
             }
 
+            .logo {
+                font-size: 1.2rem;
+                text-align: center;
+            }
+
+            .logo img {
+                height: 25px !important;
+                margin-left: 8px !important;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            nav {
+                padding: 1rem;
+            }
+
             .hero-text h1 {
                 font-size: 2rem;
+                text-align: center;
             }
 
             .hero-text .subtitle {
                 font-size: 1.1rem;
+                text-align: center;
+            }
+
+            .hero-text p {
+                font-size: 1rem;
+                text-align: center;
+            }
+
+            .hero-image {
+                padding: 1rem;
             }
 
             .contact-buttons {
                 flex-direction: column;
+            }
+
+            .btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+                text-align: center;
+            }
+
+            h2 {
+                font-size: 2rem;
             }
 
             .gallery-title {
@@ -711,6 +752,94 @@
 
             .carousel-nav.next {
                 right: 5px;
+            }
+
+            section {
+                padding: 2.5rem 1rem;
+                min-height: auto;
+            }
+
+            .research-content h3 {
+                font-size: 1.5rem;
+            }
+
+            .research-content p {
+                font-size: 0.95rem;
+            }
+
+            .research-card {
+                padding: 1.5rem;
+            }
+
+            .pub-category h3 {
+                font-size: 1.5rem;
+            }
+
+            .pub-item {
+                padding: 1rem;
+            }
+
+            .pub-item p {
+                font-size: 0.9rem;
+            }
+
+            /* Mobile-specific contact section */
+            #contact .btn {
+                font-size: 0.85rem;
+                padding: 0.8rem 1rem;
+                word-break: break-word;
+            }
+
+            /* Hide butterfly borders on mobile for better spacing */
+            #contact .contact-content > div > img {
+                display: none;
+            }
+
+            #contact .contact-content > div {
+                flex-direction: column !important;
+                gap: 0 !important;
+            }
+
+            .contact-info {
+                min-width: auto !important;
+                width: 100%;
+            }
+
+            /* Video iframe responsive */
+            iframe {
+                max-width: 100%;
+            }
+        }
+
+        /* Extra small devices */
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 1.75rem;
+            }
+
+            .hero-text .subtitle {
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .research-content h3 {
+                font-size: 1.3rem;
+            }
+
+            .research-tag {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.8rem;
+            }
+
+            .carousel-caption h4 {
+                font-size: 1.1rem;
+            }
+
+            .carousel-caption {
+                padding: 1rem;
             }
         }
 
