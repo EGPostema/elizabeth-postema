@@ -785,6 +785,30 @@
             font-style: italic;
         }
 
+        .pub-cites {
+            display: inline-block;
+            margin-top: 0.4rem;
+            padding: 0.1rem 0.7rem;
+            font-size: 0.85rem;
+            color: var(--moss);
+            border: 1px solid var(--sage);
+            text-decoration: none;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        a.pub-cites:hover {
+            background: var(--moss);
+            color: var(--warm-white);
+        }
+
+        .scholar-footnote {
+            padding: 0.8rem 2.5rem 1rem;
+            border-top: 1px solid rgba(139, 155, 126, 0.25);
+            font-size: 0.8rem;
+            font-style: italic;
+            color: var(--soft-brown);
+        }
+
         .pub-status {
             font-style: normal;
             color: var(--accent-red);
@@ -1413,7 +1437,7 @@
 
                     <!-- Filter -->
                     <div class="scholar-toolbar">
-                        <span id="pub-count">8 publications</span>
+                        <span><span id="pub-count">8 publications</span><span id="cite-total"></span></span>
                         <div class="pub-filter" role="group" aria-label="Filter publications">
                             <button type="button" data-filter="all" aria-pressed="true">All</button>
                             <button type="button" data-filter="first" aria-pressed="false">First author</button>
@@ -1422,7 +1446,7 @@
 
                     <!-- Publication list (newest first) -->
                     <ol class="pub-rows" reversed>
-                        <li class="pub-row" data-first="true">
+                        <li class="pub-row" data-doi="10.32942/X2QW84" data-first="true">
                             <div class="pub-year">2026</div>
                             <div>
                                 <a class="pub-title" href="http://doi.org/10.32942/X2QW84" target="_blank">DrawerDissect: Whole-drawer insect imaging, segmentation, and trait extraction using AI</a>
@@ -1430,7 +1454,7 @@
                                 <div class="pub-venue">PeerJ <span class="pub-status">[in press]</span></div>
                             </div>
                         </li>
-                        <li class="pub-row" data-first="false">
+                        <li class="pub-row" data-doi="10.1093/aesa/saag006" data-first="false">
                             <div class="pub-year repeat">2026</div>
                             <div>
                                 <a class="pub-title" href="https://doi.org/10.1093/aesa/saag006" target="_blank">Perspectives on the use of Artificial Intelligence (AI) in Entomology</a>
@@ -1438,7 +1462,7 @@
                                 <div class="pub-venue">Annals of the Entomological Society of America</div>
                             </div>
                         </li>
-                        <li class="pub-row" data-first="false">
+                        <li class="pub-row" data-doi="10.1002/ecy.70150" data-first="false">
                             <div class="pub-year">2025</div>
                             <div>
                                 <a class="pub-title" href="https://doi.org/10.1002/ecy.70150" target="_blank">Live fast, die young? Day- and night-warming affects the growth, survivorship and behavior of caterpillars in the field</a>
@@ -1446,7 +1470,7 @@
                                 <div class="pub-venue">Ecology</div>
                             </div>
                         </li>
-                        <li class="pub-row" data-first="true">
+                        <li class="pub-row" data-doi="10.1111/1365-2656.14232" data-first="true">
                             <div class="pub-year">2024</div>
                             <div>
                                 <a class="pub-title" href="https://doi.org/10.1111/1365-2656.14232" target="_blank">Eyespot peek-a-boo: Leaf rolls enhance the antipredator effect of insect eyespots</a>
@@ -1454,7 +1478,7 @@
                                 <div class="pub-venue">Journal of Animal Ecology <span class="pub-status">(Elton Prize shortlist)</span></div>
                             </div>
                         </li>
-                        <li class="pub-row" data-first="true">
+                        <li class="pub-row" data-doi="10.1093/beheco/arac088" data-first="true">
                             <div class="pub-year">2022</div>
                             <div>
                                 <a class="pub-title" href="https://doi.org/10.1093/beheco/arac088" target="_blank">Tackling complexity in animal color research: a response to comments on Postema et al.</a>
@@ -1462,7 +1486,7 @@
                                 <div class="pub-venue">Behavioral Ecology</div>
                             </div>
                         </li>
-                        <li class="pub-row" data-first="true">
+                        <li class="pub-row" data-doi="10.1093/beheco/arac056" data-first="true">
                             <div class="pub-year repeat">2022</div>
                             <div>
                                 <a class="pub-title" href="https://doi.org/10.1093/beheco/arac056" target="_blank">Color under pressure: how multiple factors shape defensive coloration</a>
@@ -1470,7 +1494,7 @@
                                 <div class="pub-venue">Behavioral Ecology</div>
                             </div>
                         </li>
-                        <li class="pub-row" data-first="true">
+                        <li class="pub-row" data-doi="10.1093/cz/zoab082" data-first="true">
                             <div class="pub-year">2021</div>
                             <div>
                                 <a class="pub-title" href="https://doi.org/10.1093/cz/zoab082" target="_blank">The effectiveness of eyespots and masquerade in protecting artificial prey across ontogenetic and seasonal shifts</a>
@@ -1478,7 +1502,7 @@
                                 <div class="pub-venue">Current Zoology</div>
                             </div>
                         </li>
-                        <li class="pub-row" data-first="false">
+                        <li class="pub-row" data-doi="10.1016/j.cois.2021.05.001" data-first="false">
                             <div class="pub-year repeat">2021</div>
                             <div>
                                 <a class="pub-title" href="https://doi.org/10.1016/j.cois.2021.05.001" target="_blank">The complexity of global change and its effects on insects</a>
@@ -1487,6 +1511,7 @@
                             </div>
                         </li>
                     </ol>
+                    <p class="scholar-footnote" id="cite-note" hidden>Citation counts update automatically from OpenAlex and may differ slightly from Google Scholar.</p>
                 </div>
             </div>
         </section>
@@ -1670,7 +1695,75 @@
             });
             document.getElementById('pub-count').textContent =
                 shown + (shown === 1 ? ' publication' : ' publications');
+            updateCiteTotal();
         }
+
+        // ---- Auto-updating "Cited by" counts ----
+        // Counts come from OpenAlex (free, no key), with Crossref as a fallback
+        // for any DOI OpenAlex doesn't have yet. A row can list several DOIs
+        // separated by spaces (e.g. a preprint and its published version);
+        // their counts are summed.
+        function updateCiteTotal() {
+            let total = 0, any = false;
+            document.querySelectorAll('.pub-row').forEach(row => {
+                if (!row.hidden && row.dataset.cites !== undefined) {
+                    total += Number(row.dataset.cites);
+                    any = true;
+                }
+            });
+            document.getElementById('cite-total').textContent =
+                any ? ' · ' + total + (total === 1 ? ' citation' : ' citations') : '';
+        }
+
+        async function loadCitations() {
+            const rows = [...document.querySelectorAll('.pub-row[data-doi]')];
+            const dois = [...new Set(rows.flatMap(r => r.dataset.doi.toLowerCase().split(/\s+/)))];
+            const counts = {}, ids = {};
+
+            try {
+                const url = 'https://api.openalex.org/works?filter=doi:' + dois.join('|') +
+                    '&per-page=50&select=id,doi,cited_by_count&mailto=epostema@fieldmuseum.org';
+                const data = await (await fetch(url)).json();
+                data.results.forEach(w => {
+                    const d = w.doi.replace('https://doi.org/', '').toLowerCase();
+                    counts[d] = w.cited_by_count;
+                    ids[d] = w.id.split('/').pop();
+                });
+            } catch (e) { /* fall through to Crossref */ }
+
+            await Promise.all(dois.filter(d => !(d in counts)).map(async d => {
+                try {
+                    const j = await (await fetch('https://api.crossref.org/works/' + d)).json();
+                    counts[d] = j.message['is-referenced-by-count'];
+                } catch (e) { /* leave this DOI without a count */ }
+            }));
+
+            let any = false;
+            rows.forEach(row => {
+                const known = row.dataset.doi.toLowerCase().split(/\s+/).filter(d => d in counts);
+                if (!known.length) return;
+                any = true;
+                const n = known.reduce((sum, d) => sum + counts[d], 0);
+                row.dataset.cites = n;
+                const workIds = known.filter(d => ids[d]).map(d => ids[d]);
+                const badge = document.createElement(n > 0 && workIds.length ? 'a' : 'span');
+                badge.className = 'pub-cites';
+                badge.textContent = 'Cited by ' + n;
+                if (badge.tagName === 'A') {
+                    badge.href = 'https://openalex.org/works?filter=cites:' + workIds.join('|');
+                    badge.target = '_blank';
+                    badge.rel = 'noopener';
+                }
+                row.querySelector('.pub-venue').after(badge);
+            });
+
+            if (any) {
+                document.getElementById('cite-note').hidden = false;
+                updateCiteTotal();
+            }
+        }
+
+        loadCitations();
 
         document.querySelectorAll('.pub-filter button').forEach(btn => {
             btn.addEventListener('click', () => {
