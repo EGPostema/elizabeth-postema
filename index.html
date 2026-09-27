@@ -504,6 +504,7 @@
 
         .carousel-wrapper {
             overflow: hidden;
+            transition: height 0.4s ease;
             border: 3px solid var(--sage);
             background: var(--warm-white);
             box-shadow: 0 8px 30px var(--shadow);
@@ -511,25 +512,22 @@
 
         .carousel-track {
             display: flex;
+            align-items: flex-start;
             transition: transform 0.5s ease;
         }
 
+        /* Each slide takes its image's natural aspect ratio; the wrapper
+           resizes to the current slide, so there is no letterbox padding */
         .carousel-item {
             min-width: 100%;
-            aspect-ratio: 4/3;
             position: relative;
         }
 
-		.carousel-item img {
- 		   object-fit: contain !important;
-		    background: var(--cream);
-		}
-
         .carousel-item img,
         .carousel-item svg {
+            display: block;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
         }
 
         .carousel-caption {
@@ -612,57 +610,179 @@
             opacity: 0.8;
         }
 
-        /* Publications Section */
+        /* Publications Section: Scholar-style profile card */
         #publications {
             background: var(--warm-white);
         }
 
-        .publications-list {
-            max-width: 900px;
-        }
-
-        .pub-category {
-            margin-bottom: 3rem;
-        }
-
-        .pub-category h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            color: var(--moss);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--sage);
-        }
-
-        .pub-item {
-            padding: 1.5rem;
-            margin-bottom: 1rem;
+        .scholar-card {
+            max-width: 960px;
             background: var(--cream);
-            border-left: 4px solid var(--sage);
-            transition: all 0.3s ease;
+            border: 2px solid var(--sage);
+            box-shadow: 0 8px 30px var(--shadow);
         }
 
-        .pub-item:hover {
-            border-left-color: var(--accent-red);
+        .scholar-profile {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 2rem;
+            align-items: center;
+            padding: 2rem 2.5rem;
+            border-bottom: 2px solid var(--sage);
             background: var(--warm-white);
-            transform: translateX(8px);
-            box-shadow: 0 4px 15px var(--shadow);
         }
 
-        .pub-item p {
+        .scholar-photo {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 3px solid var(--sage);
+            object-fit: cover;
+        }
+
+        .scholar-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--moss);
+            line-height: 1.2;
+        }
+
+        .scholar-affil {
             color: var(--earth);
-            margin-bottom: 0.5rem;
+            font-style: italic;
+            margin-bottom: 0.8rem;
         }
 
-        .pub-link {
-            color: var(--accent-red);
+        .scholar-interests {
+            margin-bottom: 1rem;
+        }
+
+        .scholar-links {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .scholar-links .btn {
+            padding: 0.55rem 1.3rem;
+            font-size: 0.95rem;
+        }
+
+        .scholar-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            padding: 1rem 2.5rem;
+            border-bottom: 1px solid rgba(139, 155, 126, 0.35);
+            color: var(--earth);
+            font-size: 0.95rem;
+        }
+
+        .pub-filter {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .pub-filter button {
+            font-family: 'Lora', serif;
+            font-size: 0.9rem;
+            padding: 0.35rem 1rem;
+            border: 1px solid var(--sage);
+            background: transparent;
+            color: var(--moss);
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .pub-filter button[aria-pressed="true"] {
+            background: var(--moss);
+            border-color: var(--moss);
+            color: var(--warm-white);
+        }
+
+        .pub-filter button:focus-visible,
+        .pub-row a:focus-visible {
+            outline: 2px solid var(--accent-red);
+            outline-offset: 2px;
+        }
+
+        .pub-rows {
+            list-style: none;
+        }
+
+        .pub-row {
+            display: grid;
+            grid-template-columns: 5.5rem 1fr;
+            gap: 1.5rem;
+            padding: 1.3rem 2.5rem;
+            border-bottom: 1px solid rgba(139, 155, 126, 0.25);
+            transition: background 0.2s ease;
+        }
+
+        .pub-row:last-child {
+            border-bottom: none;
+        }
+
+        .pub-row:hover {
+            background: var(--warm-white);
+        }
+
+        .pub-row[hidden] {
+            display: none;
+        }
+
+        .pub-year {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--sage);
+            line-height: 1.2;
+        }
+
+        .pub-year.repeat {
+            visibility: hidden;
+        }
+
+        .pub-title {
+            display: inline;
+            color: var(--deep-green);
+            font-weight: 600;
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
+            background-image: linear-gradient(var(--accent-red), var(--accent-red));
+            background-size: 0 2px;
+            background-position: 0 100%;
+            background-repeat: no-repeat;
+            transition: background-size 0.3s ease, color 0.2s ease;
         }
 
-        .pub-link:hover {
-            color: var(--accent-orange);
+        .pub-title:hover {
+            color: var(--moss);
+            background-size: 100% 2px;
+        }
+
+        .pub-authors {
+            color: var(--earth);
+            font-size: 0.95rem;
+            margin-top: 0.3rem;
+        }
+
+        .pub-authors strong {
+            color: var(--deep-green);
+        }
+
+        .pub-venue {
+            color: var(--soft-brown);
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+
+        .pub-status {
+            font-style: normal;
+            color: var(--accent-red);
+            font-weight: 500;
         }
 
         /* Contact Section */
@@ -882,16 +1002,35 @@
                 height: 100%;
             }
 
-            .pub-category h3 {
-                font-size: 1.5rem;
+            /* Scholar card on mobile */
+            .scholar-profile {
+                grid-template-columns: 1fr;
+                justify-items: center;
+                text-align: center;
+                padding: 1.5rem;
             }
 
-            .pub-item {
-                padding: 1rem;
+            .scholar-links {
+                justify-content: center;
             }
 
-            .pub-item p {
-                font-size: 0.9rem;
+            .scholar-toolbar {
+                padding: 1rem 1.5rem;
+                justify-content: center;
+            }
+
+            .pub-row {
+                grid-template-columns: 1fr;
+                gap: 0.2rem;
+                padding: 1rem 1.5rem;
+            }
+
+            .pub-year {
+                font-size: 1.2rem;
+            }
+
+            .pub-year.repeat {
+                display: none;
             }
 
             /* Mobile-specific contact section */
@@ -985,6 +1124,13 @@
             }
         }
 
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 10px;
@@ -1031,8 +1177,8 @@
                     <div class="hero-text">
                         <h1>Elizabeth G. Postema, PhD</h1>
                         <p class="subtitle">Postdoctoral Researcher, Field Museum</p>
-                        <p>Insects are among the most diverse organisms on earth. As a researcher, I study the conflicting pressures that produce and maintain diversity in insect coloration and behavior - and how these traits shift in response to changing climatic conditions.</p> 
-			<p>I create computer vision (AI) tools to extract traits from thousands of images of specimens, and use these data for large phylogenetic comparative analyses. I also conduct experiments in the field (using both live and artificial insects) to test hypotheses about the ecology and evolution of defensive adaptations.</p>
+                        <p>Insects are among the most diverse organisms on earth. As a researcher, I study the pressures that produce and maintain diversity in insect communities, color patterns, and behaviors - and how these traits shift in response to changing environmental conditions.</p> 
+			<p>To answer these questions, I draw on natural history collections, build AI tools that extract traits from thousands of specimen images, and run experiments in the field and lab. I also survey insect communities with both traditional methods and AI-enhanced approaches.</p>
                         <div class="contact-buttons">
                             <a href="#contact" class="btn primary">Get in Touch</a>
                             <a href="#publications" class="btn">View Publications</a>
@@ -1099,7 +1245,7 @@
                                 </button>
 							    <div class="related-pubs-dropdown" id="ai-pubs">
 							        <div class="pub-link-item">
-							            <a href="http://doi.org/10.32942/X2QW84" target="_blank">DrawerDissect: Whole-drawer insect imaging, segmentation, and trait extraction using AI</a>
+							            <a href="http://doi.org/10.32942/X2QW84" target="_blank">DrawerDissect: Whole-drawer insect imaging, segmentation, and trait extraction using AI (PeerJ, in press)</a>
 							        </div>
 									<div class="pub-link-item">
 							            <a href="https://doi.org/10.1093/aesa/saag006" target="_blank">Perspectives on the use of artificial intelligence in entomology</a>
@@ -1231,53 +1377,106 @@
         <section id="publications" class="reveal">
             <div class="container">
                 <h2>Publications</h2>
-                <div class="publications-list">
-                    <div class="pub-category">
-                        <h3>In Review</h3>
-                        <div class="pub-item">
-                            <p><strong>Postema, E.G.</strong>, Briscoe, L., Harder, C., Hancock, G.R.A., Guarnieri, L.D., Eisel, T., Welch, K., Fisher, N., Johnson, C., Souza, D., Sepulveda, T., Phillip, D., Baquiran, R., de Medeiros, B.A.S. (2025). DrawerDissect: Whole-drawer insect imaging, segmentation, and trait extraction using AI.</p>
-                            <a href="http://doi.org/10.32942/X2QW84" class="pub-link" target="_blank">View Pre-print →</a>
+
+                <div class="scholar-card">
+                    <!-- Profile header -->
+                    <div class="scholar-profile">
+                        <img class="scholar-photo" src="photos/mainphoto.jpg" alt="">
+                        <div>
+                            <div class="scholar-name">Elizabeth G. Postema</div>
+                            <div class="scholar-affil">Postdoctoral Research Scientist, Field Museum of Natural History</div>
+                            <div class="scholar-interests">
+                                <span class="research-tag">Entomology</span>
+                                <span class="research-tag">Insect declines</span>
+                                <span class="research-tag">Animal coloration</span>
+                                <span class="research-tag">Computer vision</span>
+                                <span class="research-tag">Natural history collections</span>
+                            </div>
+                            <div class="scholar-links">
+                                <a href="https://scholar.google.com/citations?user=xzqmQWYAAAAJ" target="_blank" class="btn primary">Google Scholar →</a>
+                                <a href="https://www.researchgate.net/profile/Elizabeth-Postema" target="_blank" class="btn">ResearchGate →</a>
+                                <a href="https://github.com/EGPostema" target="_blank" class="btn">GitHub →</a>
+                            </div>
                         </div>
                     </div>
 
-					<div class="pub-category">
-					    <h3>Peer-Reviewed</h3>
-						<div class="pub-item">
-                            <p>Krell, R., Siebert, M., Bessin, R., Gerken, A., <strong>Postema, E.G.</strong>, Pavlic, T., Riddick, E.W., & Zilnik, G. (2026). Perspectives on the use of Artificial Intelligence (AI) in Entomology. <em>Annals of the Entomological Society of America</em></p>
-                        	<a href="https://doi.org/10.1093/aesa/saag006" class="pub-link" target="_blank">Read Article →</a>
-						</div>
-					    <div class="pub-item">
-					        <p>Yang, L.H., <strong>Postema, E.G.</strong>, Arefaine, H., Cohoon, F.Y., Deen, E.A., Durand, Y.L., Erdosh, G.I., Ma, H., Mausling, C.N., Solis, S., Wilson, M.R. (2025). Live fast, die young? Day- and night-warming affects the growth, survivorship and behavior of caterpillars in the field. <em>Ecology</em>.</p>
-					        <a href="https://doi.org/10.1002/ecy.70150" class="pub-link" target="_blank">Read Article →</a>
-					    </div>
-					    <div class="pub-item">
-					        <p><strong>Postema, E.G.</strong> (2024). Eyespot peek-a-boo: Leaf rolls enhance the antipredator effect of insect eyespots. <em>Journal of Animal Ecology</em>.</p>
-					        <a href="https://doi.org/10.1111/1365-2656.14232" class="pub-link" target="_blank">Read Article →</a>
-					    </div>
-					    <div class="pub-item">
-					        <p><strong>Postema, E.G.</strong>, Lippey, M.K., Armstrong-Ingram, T. (2022). Tackling complexity in animal color research: a response to comments on Postema et al. <em>Behavioral Ecology</em>.</p>
-					        <a href="https://doi.org/10.1093/beheco/arac088" class="pub-link" target="_blank">Read Article →</a>
-					    </div>
-					    <div class="pub-item">
-					        <p><strong>Postema, E.G.</strong>, Lippey, M.K., Armstrong-Ingram, T. (2022). Color under pressure: how multiple factors shape defensive coloration. <em>Behavioral Ecology</em>.</p>
-					        <a href="https://doi.org/10.1093/beheco/arac056" class="pub-link" target="_blank">Read Article →</a>
-					    </div>
-					    <div class="pub-item">
-					        <p><strong>Postema, E.G.</strong> (2021). The effectiveness of eyespots and masquerade in protecting artificial prey across ontogenetic and seasonal shifts. <em>Current Zoology</em>.</p>
-					        <a href="https://doi.org/10.1093/cz/zoab082" class="pub-link" target="_blank">Read Article →</a>
-					    </div>
-					    <div class="pub-item">
-					        <p>Yang, L.H., <strong>Postema, E.G.</strong>, Hayes, T., Lippey, M.K., MacArthur, D. (2021). The complexity of global change and its effects on insects. <em>Current Opinion in Insect Science</em>.</p>
-					        <a href="https://doi.org/10.1016/j.cois.2021.05.001" class="pub-link" target="_blank">Read Article →</a>
-					    </div>
-					</div>
+                    <!-- Filter -->
+                    <div class="scholar-toolbar">
+                        <span id="pub-count">8 publications</span>
+                        <div class="pub-filter" role="group" aria-label="Filter publications">
+                            <button type="button" data-filter="all" aria-pressed="true">All</button>
+                            <button type="button" data-filter="first" aria-pressed="false">First author</button>
+                        </div>
+                    </div>
+
+                    <!-- Publication list (newest first) -->
+                    <ol class="pub-rows" reversed>
+                        <li class="pub-row" data-first="true">
+                            <div class="pub-year">2026</div>
+                            <div>
+                                <a class="pub-title" href="http://doi.org/10.32942/X2QW84" target="_blank">DrawerDissect: Whole-drawer insect imaging, segmentation, and trait extraction using AI</a>
+                                <div class="pub-authors"><strong>Postema, E.G.</strong>, Briscoe, L., Harder, C., Hancock, G.R.A., Guarnieri, L.D., Eisel, T., Welch, K., Fisher, N., Johnson, C., Souza, D., Sepulveda, T., Phillip, D., Baquiran, R., de Medeiros, B.A.S.</div>
+                                <div class="pub-venue">PeerJ <span class="pub-status">[in press]</span></div>
+                            </div>
+                        </li>
+                        <li class="pub-row" data-first="false">
+                            <div class="pub-year repeat">2026</div>
+                            <div>
+                                <a class="pub-title" href="https://doi.org/10.1093/aesa/saag006" target="_blank">Perspectives on the use of Artificial Intelligence (AI) in Entomology</a>
+                                <div class="pub-authors">Krell, R., Siebert, M., Bessin, R., Gerken, A., <strong>Postema, E.G.</strong>, Pavlic, T., Riddick, E.W., Zilnik, G.</div>
+                                <div class="pub-venue">Annals of the Entomological Society of America</div>
+                            </div>
+                        </li>
+                        <li class="pub-row" data-first="false">
+                            <div class="pub-year">2025</div>
+                            <div>
+                                <a class="pub-title" href="https://doi.org/10.1002/ecy.70150" target="_blank">Live fast, die young? Day- and night-warming affects the growth, survivorship and behavior of caterpillars in the field</a>
+                                <div class="pub-authors">Yang, L.H., <strong>Postema, E.G.</strong>, Arefaine, H., Cohoon, F.Y., Deen, E.A., Durand, Y.L., Erdosh, G.I., Ma, H., Mausling, C.N., Solis, S., Wilson, M.R.</div>
+                                <div class="pub-venue">Ecology</div>
+                            </div>
+                        </li>
+                        <li class="pub-row" data-first="true">
+                            <div class="pub-year">2024</div>
+                            <div>
+                                <a class="pub-title" href="https://doi.org/10.1111/1365-2656.14232" target="_blank">Eyespot peek-a-boo: Leaf rolls enhance the antipredator effect of insect eyespots</a>
+                                <div class="pub-authors"><strong>Postema, E.G.</strong></div>
+                                <div class="pub-venue">Journal of Animal Ecology <span class="pub-status">(Elton Prize shortlist)</span></div>
+                            </div>
+                        </li>
+                        <li class="pub-row" data-first="true">
+                            <div class="pub-year">2022</div>
+                            <div>
+                                <a class="pub-title" href="https://doi.org/10.1093/beheco/arac088" target="_blank">Tackling complexity in animal color research: a response to comments on Postema et al.</a>
+                                <div class="pub-authors"><strong>Postema, E.G.</strong>, Lippey, M.K., Armstrong-Ingram, T.</div>
+                                <div class="pub-venue">Behavioral Ecology</div>
+                            </div>
+                        </li>
+                        <li class="pub-row" data-first="true">
+                            <div class="pub-year repeat">2022</div>
+                            <div>
+                                <a class="pub-title" href="https://doi.org/10.1093/beheco/arac056" target="_blank">Color under pressure: how multiple factors shape defensive coloration</a>
+                                <div class="pub-authors"><strong>Postema, E.G.</strong>, Lippey, M.K., Armstrong-Ingram, T.</div>
+                                <div class="pub-venue">Behavioral Ecology</div>
+                            </div>
+                        </li>
+                        <li class="pub-row" data-first="true">
+                            <div class="pub-year">2021</div>
+                            <div>
+                                <a class="pub-title" href="https://doi.org/10.1093/cz/zoab082" target="_blank">The effectiveness of eyespots and masquerade in protecting artificial prey across ontogenetic and seasonal shifts</a>
+                                <div class="pub-authors"><strong>Postema, E.G.</strong></div>
+                                <div class="pub-venue">Current Zoology</div>
+                            </div>
+                        </li>
+                        <li class="pub-row" data-first="false">
+                            <div class="pub-year repeat">2021</div>
+                            <div>
+                                <a class="pub-title" href="https://doi.org/10.1016/j.cois.2021.05.001" target="_blank">The complexity of global change and its effects on insects</a>
+                                <div class="pub-authors">Yang, L.H., <strong>Postema, E.G.</strong>, Hayes, T., Lippey, M.K., MacArthur, D.</div>
+                                <div class="pub-venue">Current Opinion in Insect Science</div>
+                            </div>
+                        </li>
+                    </ol>
                 </div>
-				
-				<div style="text-align: left; margin-top: 3rem;">
-				    <a href="https://www.researchgate.net/profile/Elizabeth-Postema" target="_blank" class="btn">
-				        View Full Profile on ResearchGate →
-				    </a>
-				</div>			
             </div>
         </section>
 
@@ -1294,6 +1493,9 @@
 					        </a>
 					        <a href="https://github.com/EGPostema" target="_blank" class="btn" style="text-decoration: none; display: block;">
 					            💻 GitHub (EGPostema)
+					        </a>
+					        <a href="https://scholar.google.com/citations?user=xzqmQWYAAAAJ" target="_blank" class="btn" style="text-decoration: none; display: block;">
+					            🎓 Google Scholar
 					        </a>
 					        <a href="https://nirc.fieldmuseum.org/" target="_blank" class="btn" style="text-decoration: none; display: block;">
 					            🏛️ Field Museum (NIRC)
@@ -1398,6 +1600,21 @@
                 dot.onclick = () => goToSlide(id, i);
                 dotsContainer.appendChild(dot);
             }
+
+            // Resize once each image loads, and whenever the window changes size
+            items.forEach(item => {
+                const img = item.querySelector('img');
+                if (img && !img.complete) img.addEventListener('load', () => fitCarouselHeight(id));
+            });
+            fitCarouselHeight(id);
+            window.addEventListener('resize', () => fitCarouselHeight(id));
+        }
+
+        // Match the carousel frame to the current slide's height
+        function fitCarouselHeight(id) {
+            const carousel = carousels[id];
+            const current = carousel.items[carousel.currentIndex];
+            carousel.track.parentElement.style.height = current.offsetHeight + 'px';
         }
 
         function moveCarousel(id, direction) {
@@ -1422,6 +1639,7 @@
             const carousel = carousels[id];
             const offset = -carousel.currentIndex * 100;
             carousel.track.style.transform = `translateX(${offset}%)`;
+            fitCarouselHeight(id);
             
             const dotsContainer = document.getElementById(id.replace('Carousel', 'Dots'));
             const dots = dotsContainer.querySelectorAll('.carousel-dot');
@@ -1438,6 +1656,34 @@
             button.classList.toggle('active');
             dropdown.classList.toggle('active');
         }
+
+        // Publication filter (All / First author)
+        function applyPubFilter(filter) {
+            const rows = document.querySelectorAll('.pub-row');
+            let shown = 0;
+            let lastYear = null;
+            rows.forEach(row => {
+                const visible = filter === 'all' || row.dataset.first === 'true';
+                row.hidden = !visible;
+                if (!visible) return;
+                shown++;
+                // Show each year label only on the first visible row of that year
+                const yearEl = row.querySelector('.pub-year');
+                const year = yearEl.textContent.trim();
+                yearEl.classList.toggle('repeat', year === lastYear);
+                lastYear = year;
+            });
+            document.getElementById('pub-count').textContent =
+                shown + (shown === 1 ? ' publication' : ' publications');
+        }
+
+        document.querySelectorAll('.pub-filter button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.pub-filter button').forEach(b =>
+                    b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'));
+                applyPubFilter(btn.dataset.filter);
+            });
+        });
 
         initCarousel('artCarousel');
         initCarousel('outreachCarousel');
