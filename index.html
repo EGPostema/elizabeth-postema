@@ -502,32 +502,38 @@
             margin: 0 auto;
         }
 
+        /* Fixed-height stage so the layout doesn't jump between slides.
+           Each image scales to fit inside it and keeps its own frame. */
         .carousel-wrapper {
             overflow: hidden;
-            transition: height 0.4s ease;
-            border: 3px solid var(--sage);
-            background: var(--warm-white);
-            box-shadow: 0 8px 30px var(--shadow);
+            height: min(560px, 70vh);
         }
 
         .carousel-track {
             display: flex;
-            align-items: flex-start;
+            height: 100%;
             transition: transform 0.5s ease;
         }
 
-        /* Each slide takes its image's natural aspect ratio; the wrapper
-           resizes to the current slide, so there is no letterbox padding */
         .carousel-item {
             min-width: 100%;
+            height: 100%;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
         }
 
         .carousel-item img,
         .carousel-item svg {
             display: block;
-            width: 100%;
+            width: auto;
             height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            border: 3px solid var(--sage);
+            box-shadow: 0 8px 30px var(--shadow);
         }
 
         .carousel-caption {
@@ -962,6 +968,10 @@
                 font-size: 1.5rem;
             }
 
+            .carousel-wrapper {
+                height: min(420px, 60vh);
+            }
+
             .carousel-nav {
                 width: 35px;
                 height: 35px;
@@ -1177,8 +1187,8 @@
                     <div class="hero-text">
                         <h1>Elizabeth G. Postema, PhD</h1>
                         <p class="subtitle">Postdoctoral Researcher, Field Museum</p>
-                        <p>Insects are among the most diverse organisms on earth. As a researcher, I study the pressures that produce and maintain diversity in insect color patterns, behaviors, and communities. I am also interested in how insect traits shift in response to changing environmental conditions.</p> 
-			<p>To answer these questions, I draw on natural history collections, build AI tools that extract traits from thousands of specimen images, and run experiments in the field and lab.</p>
+                        <p>Insects are among the most diverse and abundant organisms on earth. I study the pressures that produce and maintain this diversity, with a specific focus on insect color and behavior. I am also interested in how insect traits and communities are shifting in response to changing environmental conditions.</p> 
+			<p>To answer these questions, I draw on long-term datasets from natural history collections, build AI tools to extract traits from thousands of specimen images, and run experiments in the field and lab.</p>
                         <div class="contact-buttons">
                             <a href="#contact" class="btn primary">Get in Touch</a>
                             <a href="#publications" class="btn">View Publications</a>
@@ -1390,7 +1400,7 @@
                                 <span class="research-tag">Ecology & Evolution</span>
                                 <span class="research-tag">Animal coloration</span>
                                 <span class="research-tag">Computer vision</span>
-								<span class="research-tag">Machine learning</span>
+                                <span class="research-tag">Machine learning</span>
                                 <span class="research-tag">Natural history collections</span>
                             </div>
                             <div class="scholar-links">
@@ -1601,21 +1611,6 @@
                 dot.onclick = () => goToSlide(id, i);
                 dotsContainer.appendChild(dot);
             }
-
-            // Resize once each image loads, and whenever the window changes size
-            items.forEach(item => {
-                const img = item.querySelector('img');
-                if (img && !img.complete) img.addEventListener('load', () => fitCarouselHeight(id));
-            });
-            fitCarouselHeight(id);
-            window.addEventListener('resize', () => fitCarouselHeight(id));
-        }
-
-        // Match the carousel frame to the current slide's height
-        function fitCarouselHeight(id) {
-            const carousel = carousels[id];
-            const current = carousel.items[carousel.currentIndex];
-            carousel.track.parentElement.style.height = current.offsetHeight + 'px';
         }
 
         function moveCarousel(id, direction) {
@@ -1640,7 +1635,6 @@
             const carousel = carousels[id];
             const offset = -carousel.currentIndex * 100;
             carousel.track.style.transform = `translateX(${offset}%)`;
-            fitCarouselHeight(id);
             
             const dotsContainer = document.getElementById(id.replace('Carousel', 'Dots'));
             const dots = dotsContainer.querySelectorAll('.carousel-dot');
